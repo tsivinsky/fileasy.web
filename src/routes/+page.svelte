@@ -1,6 +1,7 @@
 <script lang="ts">
   import { invalidateAll } from "$app/navigation";
   import { PUBLIC_API_URL } from "$env/static/public";
+  import TrashIcon from "../components/TrashIcon.svelte";
   import type { ApiError } from "../types/errors.js";
   import type { UserFile } from "../types/user.js";
   import { openFile } from "../utils/openFile.js";
@@ -27,6 +28,21 @@
 
     await invalidateAll();
   };
+
+  const handleDeleteFile = async (fileId: number) => {
+    const resp = await fetch("/api/delete", {
+      method: "POST",
+      body: JSON.stringify({ fileId }),
+    });
+    const data = (await resp.json()) as { ok: boolean } | ApiError;
+
+    if ("error" in data) {
+      // TODO: handle error in some way. maybe show to the user
+      return;
+    }
+
+    await invalidateAll();
+  };
 </script>
 
 <h1 class="text-5xl mb-4">fileasy</h1>
@@ -39,11 +55,17 @@
 <h2 class="text-3xl mt-2">Your files</h2>
 <div>
   {#each data.user.files as file (file.id)}
-    <div>
+    <div class="group flex items-center gap-2">
       <a
         href="{PUBLIC_API_URL}/{file.name}"
         class="hover:underline hover:text-blue-500">{file.name}</a
       >
+      <button
+        class="hidden group-hover:block"
+        on:click={() => handleDeleteFile(file.id)}
+      >
+        <TrashIcon size={18} color="#b00420" />
+      </button>
     </div>
   {/each}
 </div>
