@@ -10,7 +10,6 @@ export const POST = (async ({ request, cookies }) => {
 
   const formData = await request.formData();
   const data = await uploadFile(formData, accessToken);
-  console.log({ data });
 
   return new Response(JSON.stringify(data));
 }) satisfies RequestHandler;
