@@ -6,4 +6,6 @@
   <title>Fileasy</title>
 </svelte:head>
 
-<slot />
+<main class="m-2">
+  <slot />
+</main>
