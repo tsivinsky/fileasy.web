@@ -3,7 +3,7 @@
   import { page } from "$app/stores";
   import Avatar from "./Avatar.svelte";
 
-  const isLoggedIn = $page.url.pathname !== "/login";
+  $: isLoggedIn = $page.url.pathname !== "/login";
 
   const handleLogout = async () => {
     const resp = await fetch("/api/logout");
