@@ -7,12 +7,15 @@
 
   export let data;
 
+  let newFileName = "";
+
   const handleUploadFile = async () => {
     const file = await openFile();
     if (!file) return;
 
     const formData = new FormData();
     formData.set("file", file);
+    formData.set("name", newFileName);
 
     const resp = await fetch("/api/upload", {
       method: "POST",
@@ -24,6 +27,8 @@
       // TODO: handle error in some way. maybe show to the user
       return;
     }
+
+    newFileName = "";
 
     await invalidateAll();
   };
@@ -44,10 +49,21 @@
   };
 </script>
 
-<button
-  class="border border-neutral-400 hover:bg-neutral-200 text-neutral-700 py-1 px-3 rounded-md transition-colors duration-200"
-  on:click={handleUploadFile}>Upload file</button
+<form
+  on:submit|preventDefault={handleUploadFile}
+  class="flex flex-col items-start gap-2 mt-10"
 >
+  <input
+    bind:value={newFileName}
+    class="border border-neutral-400 py-1 px-2 rounded-md outline-offset-1"
+    placeholder="File name"
+  />
+  <button
+    type="submit"
+    class="border border-neutral-400 hover:bg-neutral-200 text-neutral-700 py-1 px-3 rounded-md transition-colors duration-200"
+    >Upload file</button
+  >
+</form>
 
 <h2 class="text-3xl mt-2">Your files</h2>
 <div>
