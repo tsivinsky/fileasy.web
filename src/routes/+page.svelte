@@ -44,8 +44,6 @@
   };
 </script>
 
-<h1 class="text-5xl mb-4">fileasy</h1>
-
 <button
   class="border border-neutral-400 hover:bg-neutral-200 text-neutral-700 py-1 px-3 rounded-md transition-colors duration-200"
   on:click={handleUploadFile}>Upload file</button
