@@ -10,7 +10,7 @@
     const data = await resp.json();
 
     if (data.ok) {
-      goto("/", { invalidateAll: true });
+      goto("/login", { invalidateAll: true });
     }
   };
 </script>
