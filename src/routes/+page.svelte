@@ -1,6 +1,5 @@
 <script lang="ts">
   import { invalidateAll } from "$app/navigation";
-  import { PUBLIC_API_URL } from "$env/static/public";
   import TrashIcon from "../components/TrashIcon.svelte";
   import type { ApiError } from "../types/errors.js";
   import type { UserFile } from "../types/user.js";
@@ -56,9 +55,8 @@
 <div>
   {#each data.user.files as file (file.id)}
     <div class="group flex items-center gap-2">
-      <a
-        href="{PUBLIC_API_URL}/{file.name}"
-        class="hover:underline hover:text-blue-500">{file.name}</a
+      <a href="/{file.name}" class="hover:underline hover:text-blue-500"
+        >{file.name}</a
       >
       <button
         class="hidden group-hover:block"
