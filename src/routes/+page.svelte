@@ -1,8 +1,8 @@
 <script lang="ts">
   import { invalidateAll } from "$app/navigation";
+  import { uploadFile } from "../api/uploadFile";
   import TrashIcon from "../components/TrashIcon.svelte";
   import type { ApiError } from "../types/errors.js";
-  import type { UserFile } from "../types/user.js";
   import { openFile } from "../utils/openFile.js";
 
   export let data;
@@ -13,17 +13,12 @@
     const file = await openFile();
     if (!file) return;
 
-    const formData = new FormData();
-    formData.set("file", file);
-    formData.set("name", newFileName);
+    const result = await uploadFile(
+      { file, name: newFileName },
+      data.accessToken
+    );
 
-    const resp = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    });
-    const data = (await resp.json()) as UserFile | ApiError;
-
-    if ("error" in data) {
+    if ("error" in result) {
       // TODO: handle error in some way. maybe show to the user
       return;
     }

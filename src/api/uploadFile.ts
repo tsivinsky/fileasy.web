@@ -2,7 +2,16 @@ import { PUBLIC_API_URL } from "$env/static/public";
 import type { ApiError } from "../types/errors";
 import type { UserFile } from "../types/user";
 
-export async function uploadFile(formData: FormData, accessToken: string) {
+export type UploadFileData = {
+  file: File;
+  name: string;
+};
+
+export async function uploadFile(data: UploadFileData, accessToken: string) {
+  const formData = new FormData();
+  formData.set("file", data.file);
+  formData.set("name", data.name);
+
   const resp = await fetch(`${PUBLIC_API_URL}/api/upload`, {
     method: "POST",
     body: formData,
@@ -10,11 +19,11 @@ export async function uploadFile(formData: FormData, accessToken: string) {
       Authorization: `Bearer ${accessToken}`,
     },
   });
-  const data = await resp.json();
+  const result = await resp.json();
 
-  if ("error" in data) {
-    return data as ApiError;
+  if ("error" in result) {
+    return result as ApiError;
   }
 
-  return data as UserFile;
+  return result as UserFile;
 }

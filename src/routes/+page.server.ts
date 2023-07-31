@@ -13,5 +13,6 @@ export const load = (async ({ cookies }) => {
 
   return {
     user,
+    accessToken,
   };
 }) satisfies PageServerLoad;
