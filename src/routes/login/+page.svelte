@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { PUBLIC_API_URL } from "$env/static/public";
+  import GitHubLoginButton from "../../components/GitHubLoginButton.svelte";
+  import YandexLoginButton from "../../components/YandexLoginButton.svelte";
 </script>
 
-<div>
-  <div class="flex flex-col gap-1 mt-3">
-    <a href={`${PUBLIC_API_URL}/api/auth/github`}>Login via GitHub</a>
-    <a href={`${PUBLIC_API_URL}/api/auth/yandex`}>Login via Yandex</a>
+<div class="h-screen flex flex-col justify-center items-center">
+  <h1 class="text-5xl font-bold mb-10">Login</h1>
+  <div class="flex flex-col gap-2">
+    <GitHubLoginButton />
+    <YandexLoginButton />
   </div>
 </div>

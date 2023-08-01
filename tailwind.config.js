@@ -2,6 +2,10 @@
 export default {
   content: ["./src/**/*.{svelte,css}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        yandex: "#FC3F1D",
+      },
+    },
   },
 };
