@@ -7,7 +7,7 @@
   height={size}
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 42 42"
+  viewBox="0 0 43 43"
   ><path
     d="M22 43a21 21 0 1 0 0-42 21 21 0
 0 0 0 42Z"
