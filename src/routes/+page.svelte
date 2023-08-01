@@ -65,8 +65,11 @@
   <div>
     {#each data.user.files as file (file.id)}
       <div class="group flex items-center gap-2">
-        <a href="/{file.name}" class="hover:underline hover:text-blue-500"
-          >{file.name}</a
+        <a
+          href="/{file.name}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:underline hover:text-blue-500">{file.name}</a
         >
         <button
           class="hidden group-hover:block"
