@@ -44,10 +44,10 @@
   };
 </script>
 
-<div class="m-2">
+<div class="m-2 mt-10">
   <form
     on:submit|preventDefault={handleUploadFile}
-    class="flex flex-col items-start gap-2 mt-10"
+    class="flex flex-col items-start gap-2"
   >
     <input
       bind:value={newFileName}
