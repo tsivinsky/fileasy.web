@@ -9,10 +9,20 @@ export const load = (async ({ cookies }) => {
     throw redirect(307, "/login");
   }
 
-  const user = await getUser(accessToken);
+  try {
+    const user = await getUser(accessToken);
 
-  return {
-    user,
-    accessToken,
-  };
+    return {
+      user,
+      accessToken,
+    };
+  } catch(err) {
+    cookies.delete("accessToken", {
+      path: "/",
+    });
+    cookies.delete("refreshToken", {
+      path: "/",
+    });
+    throw redirect(307, "/login")
+  }
 }) satisfies PageServerLoad;
